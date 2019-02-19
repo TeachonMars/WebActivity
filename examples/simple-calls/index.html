@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div class="row">
+        <div class="col-3">
+            <div class="list-group hidden" id="list-home-list" role="tablist">
+              <a class="list-group-item list-group-item-action active" data-toggle="list" href="#list-tutorial" role="tab">Tuto</a>
+              <a class="list-group-item list-group-item-action " data-toggle="list" href="#list-example-1" role="tab">Ex 1</a>
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-example-2" role="tab">Ex 2</a>
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-example-3" role="tab">Ex 3</a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="tab-content p-2" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-tutorial" role="tabpanel" aria-labelledby="list-home-list">
+                    <h5>Tutorial</h5>
+                    <p>This content is like a little tutorial that will help you understand how to send tracking data from your content to the Mission Center.</p>
+                    <p>Each example relates to an action that can be done in a content. The corresponding code is displayed and the <em>Launch</em> button will execute this piece of code.</p>
+                    <p>The sessions data that is sent to the Mission Center is shown on the right.</p>
+                </div>
+                <div class="tab-pane fade" id="list-example-1" role="tabpanel" aria-labelledby="list-home-list">
+                    <h5>Example 1 - Send time data</h5>
+                    <p>Simple script that initiates a new session with some time spent in the content and sends it.</p>
+                    <code></code>
+                    <div class="mt-2"><button class="btn btn-success script-btn" data-script="scriptOne">Launch</button></div>
+                </div>
+                <div class="tab-pane fade" id="list-example-2" role="tabpanel" aria-labelledby="list-profile-list">
+                    <h5>Example 2 - Time and progress</h5>
+                    <p>Simple script that initiates a new session with some time spent and progress in the content and sends it.</p>
+                    <code></code>
+                    <div class="mt-2"><button class="btn btn-success script-btn" data-script="scriptTwo">Launch</button></div>
+                </div>
+                <div class="tab-pane fade" id="list-example-3" role="tabpanel" aria-labelledby="list-profile-list">
+                    <h5>Example 3 - Read data from the MC</h5>
+                    <p>Simple script that reads recorded data from the app.</p>
+                    <p>The app provides data that was already recorded from previous use of the content by the current learner.</p>
+                    <code ></code>
+                    <div class="mt-2"><button class="btn btn-success script-btn" data-script="scriptThree">Launch</button></div>
+                    <pre class="mt-2" id="codeThree"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    $(function() {
+        window.ToM = window.ToM || (window.top && window.top.ToM);
+
+        var scripts = {
+scriptOne:
+function() {
+    ToM.data.init();
+    ToM.data.set('time', 30);
+    ToM.data.send();
+},
+
+scriptTwo:
+function() {
+    ToM.data.init();
+    ToM.data.set('time', 30);
+    ToM.data.set('progress', 60);
+    ToM.data.send();
+},
+
+scriptThree:
+function() {
+    ToM.data.init();
+    var data = {
+        time: ToM.data.get('time'),
+        progress: ToM.data.get('progress'),
+        score: ToM.data.get('score'),
+        points: ToM.data.get('points')
+    };
+    $('#codeThree').text(JSON.stringify(data, null, 4));
+}
+};
+
+        $(".script-btn").each(function() {
+            var script = $(this).data("script");
+            if (script && scripts[script]) {
+                $(this).closest(".tab-pane").find('code').text(scripts[script]+"");
+            }
+        });
+        $(".script-btn").click(function() {
+            var script = $(this).data("script");
+            if (scripts[script]) {
+                scripts[script]();
+            }
+        });
+
+    });
+</script>
+<style type="text/css">
+code {
+    font-family: monospace;
+    white-space: pre;
+}
+
+</style>
+</body>
+</html>

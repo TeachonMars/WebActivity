@@ -1,0 +1,50 @@
+
+body {
+    margin:10px;
+    background-color: #f7f7f7;
+}
+
+iframe {
+    border: 1px solid black;
+}
+a {
+    cursor: pointer;
+}
+
+.right-panel {
+    width: 400px;
+    height: 600px;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 100px;
+}
+
+.well-black .title {
+    padding: 10px;
+    background-color: #333333;
+}
+
+.well-black {
+    background-color: black;
+    color: white;
+}
+.well-black code, .well-black pre {
+    padding: 10px;
+    color: #A0A0A0;
+}
+
+
+button {
+    border: 1px solid light-gray;
+    border-radius: 4px;
+    background-color: #4570FF;
+    padding: 5px 7px;
+    font-size: 0.8em;
+    color: white;
+    margin: 3px ;
+}
+input {
+    padding 5px;
+    font-size: 0.8em;
+}

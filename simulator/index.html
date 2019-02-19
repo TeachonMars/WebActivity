@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Activity Test Environment</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/lodash/core.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/ToM-dummy.js"></script>
+    <script type="text/javascript" src="js/ToM-interface.js"></script>
+    <script type="text/javascript" src="js/ToM.js"></script>
+</head>
+<body>
+    <div class="">
+        <form id="content-form" class="form-inline" style="background-color: #f5f5f5;">
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Content URL</div>
+                </div>
+                <input class="form-control" type="text" id="content-url-input" size="40" />
+            </div>
+            <input class="btn btn-primary mb-2" id="load-btn" type="submit" value="Load" />&nbsp;
+        <input class="btn btn-primary mb-2" id="close-btn" type="button" value="Close" />&nbsp;
+        <input class="btn btn-primary mb-2" id="relaunch-btn" type="button" value="Relaunch" />&nbsp;
+        <input class="btn btn-default mb-2" id="toggle-sessions-btn" type="button" value="Toggle sessions" />&nbsp;
+        </form>
+
+        <form id="frame-form" class="form-inline" style="background-color: #f5f5f5;">
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Width</div>
+                </div>
+                <input class="form-control" type="text" name="frameWidth" id="frame-width-input" value="500" size="4" />
+            </div>
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Height</div>
+                </div>
+                <input class="form-control" type="text" name="frameHeight" id="frame-height-input" value="860" size="4" />
+            </div>
+            <input class="btn btn-primary mb-2" id="load-btn" type="submit" value="Resize" />&nbsp;
+        </form>
+    </div>
+    <iframe
+        width="500px" height="860px" border="0" id="contentIframe"></iframe>
+
+<div id="sessions-panel" class="right-panel well-black well">
+<div class="title">Sessions sent to the Mission Center</div>
+<pre><code id="sessions-container"></code></pre>
+</div>
+
+<script type="text/javascript">
+
+    var contentUrl = "../examples/simple-calls/";
+
+    $("#content-url-input").val(contentUrl);
+    loadContent();
+    SetIframeSize();
+
+    function SetIframeSize() {
+        var width = $("#frame-width-input").val(),
+            height = $("#frame-height-input").val();
+
+        var iframe = document.getElementById("contentIframe");
+        iframe.width = width + 'px';
+        iframe.height = height + 'px';
+    }
+
+    $('form#frame-form').submit(function(e) {
+        e.preventDefault();
+        SetIframeSize();
+    });
+
+    function loadContent() {
+        var src = $("#content-url-input").val();
+        $("#contentIframe").attr("src", src);
+    }
+
+    function closeContent() {
+        $("#contentIframe").attr("src", null);
+    }
+
+    $('form#content-form').submit(function(e) {
+        e.preventDefault();
+        loadContent();
+    });
+
+    $('#close-btn').click(closeContent);
+
+    $('#relaunch-btn').click(function() {
+        closeContent();
+        loadContent();
+    });
+
+    $("#toggle-sessions-btn").click(function(){
+        $("#sessions-panel").toggle();
+    });
+
+
+    var reduceSessions = function() {
+        window.reducedSessions = {
+          time: 30,
+          progress: 0,
+          score: null,
+          success: null,
+          points: 50,
+          suspendData: null
+        };
+
+      _.forEach(window.sessions, function(session) {
+        if (session.time) {
+          window.reducedSessions.time += session.time;
+        }
+        if (session.progress && session.progress > window.reducedSessions.progress) {
+          window.reducedSessions.progress = session.progress;
+        }
+        if (session.score && session.score > window.reducedSessions.score) {
+          window.reducedSessions.score = session.score;
+        }
+        if (session.success) {
+          window.reducedSessions.success = session.success;
+        }
+        if (session.points) {
+          window.reducedSessions.points += session.points;
+        }
+        if (session.suspendData) {
+          window.reducedSessions.suspendData = session.suspendData;
+        }
+      });
+    }
+
+    window.sessions = [];
+    window.reducedSessions = {
+        time: 30,
+        progress: 0,
+        score: null,
+        success: null,
+        points: 50,
+        suspendData: null
+    };
+    window.pushSession = function(s, r) {
+        window.sessions.push(s);
+        reduceSessions();
+        $("#sessions-container").html(JSON.stringify(window.sessions, null, 4));
+    }
+</script>
+</body>
+</html>

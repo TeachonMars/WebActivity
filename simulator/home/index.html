@@ -1,0 +1,744 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+		<title></title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
+	 	<meta http-equiv="X-UA-Compatible" content="IE=11" />
+	 	<link rel="stylesheet" href="css/style.css" />
+	 	<script src="./js/jquery.3.3.1.min.js"></script>
+	 	<script src="./js/bluebird.min.js"></script>
+	 	<script src="./js/translations.js"></script>
+	</head>
+	<body>
+		<div class="header_container">
+		<div class="header">
+			<div class="header_left">
+				<a href="#"><img src="./img/header_clarins.png" class="header_clarins" /></a>
+				<form class="header_search" method="post">
+					<input type="text" placeholder="Search" />
+					<button type="submit" class="header_button">
+						<i class="fas fa-search"></i>
+					</button>
+				</form>
+				<div class="header_member">
+					<div class="member_img">
+						<img src="#" />
+					</div>
+					<div class="member_profil">
+						<a href="#" onclick="ToM.navigation.displayProfile()" class="profil_redirection">
+							<span class="member_welcome" data-trans="header.welcome">welcome</span>
+							<span class="member_names"></span>
+						</a>
+						<div class="member_rewards">
+							<span class="rewards_points"></span>
+							<span class="rewards_pipe">|</span>
+							<span class="rewards_badges"></span>
+						</div>
+						<div class="member_community">
+							<a href="#" onclick="ToM.navigation.displayApps()" class="community_text">
+								<i class="fas fa-comments"></i>
+								&nbsp;
+								<span data-trans="header.apps-link">my community</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="carrousel">
+				<img class="previous" src="img/g.png">
+
+				<div class="wrapper">
+					<div class="movingCache">
+
+					</div>
+					<div class="overlay"> </div>
+				</div>
+
+				<img class="next" src="img/d.png">
+				<div class="progress"></div>
+
+				<a class="carrousel_texts" href="" target="">
+					<div class="presentation"></div>
+				</a>
+			</div>
+		</div>
+		</div>
+
+		<div class="happens">
+			<div class="happens_top">
+				<div class="title_line"></div>
+				<div class="parts_title">
+					<span class="title" data-trans="happens.title">
+						what happens around me?
+					</span>
+				</div>
+				<div class="title_line"></div>
+			</div>
+			<div class="happens_middle">
+
+			</div>
+			<div class="happens_bottom">
+				<a class="happens_button" data-trans="happens.all">all news</a>
+			</div>
+		</div>
+		<div class="courses">
+			<div class="courses_top">
+				<div class="title_line"></div>
+				<div class="parts_title">
+					<span class="title" data-trans="courses.title">
+						My training courses
+					</span>
+				</div>
+				<div class="title_line"></div>
+			</div>
+			<div class="courses_bottom">
+			</div>
+		</div>
+		<div class="categories">
+			<div class="categories_top">
+				<div class="title_line"></div>
+				<div class="parts_title">
+					<span class="title" data-trans="catalog.title">
+						Catalog
+					</span>
+				</div>
+				<div class="title_line"></div>
+			</div>
+			<div class="categories_bottom">
+			</div>
+		</div>
+
+		<div class="footer_container">
+		<div class="footer">
+			<div class="footer_links">
+				<div class="links_left">
+					<a href="http://clarins.elearnis.fr/biblio/" target="_blank" class="footer_product footer_link" data-trans="footer.product-library">product library</a>
+					<span class="footer_network" data-trans="footer.network">follow us: </span>
+					<div class="network_icone">
+						<a href="https://www.facebook.com/ClarinsFrance/" target="_blank"><img src="img/FB.png" /></a>
+						<a href="https://www.instagram.com/clarinsfr/?hl=fr" target="_blank"><img src="img/insta.png" /></a>
+						<a href="https://www.youtube.com/user/clarins" target="_blank"><img src="img/ytb.png" /></a>
+					</div>
+				</div>
+				<div class="links_right">
+					<a href="mailto:clarinsepro@clarins.com" class="help" data-trans="footer.help">need help?</a>
+				</div>
+			</div>
+			<div class="footer_privacy">
+				<span class="privacy" data-trans="footer.copyright"> © CLARINS, All Rights Reserved </span> |
+				<a class="footer_link" target="_blank" href="https://clarinsepro-europe-userdata.teachonmars.com/api/v3/device/tos?lang=$(LANGUAGE)&mode=view" data-trans="footer.legal">Legal notice</a>
+				<img src="img/footer_clarins.svg" class="clarins" />
+			</div>
+		</div>
+		</div>
+		<script>
+			var currentLanguage = "en";
+			var translationsStrings = {};
+			//Appelation de la librairie ToM dans l'environnement
+			window.addEventListener('load', function () {
+				window.ToM = window.ToM || (window.top && window.top.ToM) || {};
+				init();
+			});
+
+
+	        function resizeFrame() {
+	            if (window.top && window.top.SetIframeSize) {
+	                window.top.SetIframeSize();
+	            }
+	        }
+			//Gestion des données en json
+			//Gestion du profil
+
+			function loadProfile(data_profil) {
+	            currentLanguage = data_profil.lang;
+                if (allTranslations[currentLanguage]) {
+                    translationsStrings = allTranslations[currentLanguage];
+                }
+                else {
+                    translationsStrings = allTranslations["en"];
+                }
+                $('[data-trans]').each(function(i, el) {
+                    var stringId = $(el).data('trans');
+                    if (translationsStrings[stringId]) {
+                        if ($(el).is('input')) {
+                            $(el).attr("placeholder", translationsStrings[stringId]);
+                        }
+                        else {
+                            $(el).text(translationsStrings[stringId]);
+                        }
+                    }
+                });
+
+
+				//Version ToM
+				var id		    = data_profil.learnerId;
+				var imagePath   = data_profil.avatar && data_profil.avatar.url ? data_profil.avatar.url : "img/avatar-default.png";
+				var firstname   = data_profil.firstname;
+				var lastname    = data_profil.lastname;
+				var points      = parseInt(data_profil.points);
+				var points_text = translationsStrings["profile.points"];
+				var badges      = undefined;
+
+				if (points < 2) points_text = translationsStrings["profile.points"];
+
+				$(".header_member .member_img img").attr("src", imagePath);
+				$(".header_member .member_profil .member_names").text(firstname + " " + lastname);
+				$(".header_member .member_profil .member_rewards .rewards_points").text(points_text.replace(':p', points));
+				//$(".header .header_left .header_member .member_profil .member_rewards .rewards_badges").text(badges + badges_text);
+
+				if(badges == undefined){
+					$(".header .header_left .header_member .member_profil .member_rewards .rewards_pipe").css("display","none");
+				}
+				resizeFrame();
+
+
+				$(".footer_link").each(function(idx, el) {
+					var href = $(el).attr('href');
+					href = href.replace('$(LANGUAGE)', data_profil.lang);
+					$(el).attr('href', href);
+				});
+
+
+			}
+
+
+			function loadFeaturedCommunications(content_slider) {
+				var slider_imagePath   = "";
+				var slider_title	   = "";
+				var slider_description = "";
+				var slider_link		   = "";
+				var slider_button	   = "";
+
+				for (let i = 0; i < content_slider.length; i++) {
+					slider_imagePath   = content_slider[i].featuredImage.url;
+					slider_title       = content_slider[i].title;
+					slider_description = content_slider[i].description || "";
+					slider_link		   = content_slider[i].link;
+
+					switch(content_slider[i].type) {
+						case 'image':
+						case 'shorttext':
+						case 'duel':
+							slider_button = null;
+							break;
+
+						default:
+							slider_button	   = translationsStrings["header.featured.discover"];
+
+					}
+
+
+					$(".movingCache").append("<img src=\"" + slider_imagePath + "\" data-titre-presentation=\"" + slider_title + "\" data-description-presentation=\"" + slider_description + "\" data-commid=\""+content_slider[i].id+"\" data-link=\"" + slider_link + "\" "+
+						(slider_button ? "data-button=\"" + slider_button + "\"" : "")+
+						" />");
+				}
+				resizeFrame();
+				initHeaderNavigation();
+			}
+
+			function loadCommunications(result) {
+				var data_articles = result.list;
+				var article;
+				var article_title	  = "";
+				var article_imagePath = "";
+				var article_text	  = "";
+				var article_link	  = "";
+				var article_argument  = "";
+				var number_display    = 0;
+
+				for (let i = 0; i < data_articles.length; i++) {
+					article = data_articles[i];
+					if (article.featured || article.type == "duel" || article.type == "shorttext") {
+						continue;
+					}
+
+					if (number_display < 4) {
+						article_title	  = article.title;
+						article_imagePath = article.image.url;
+						article_text	  = "";
+
+						switch (article.type) {
+							case 'weblink':
+							case 'article':
+								article_argument  = translationsStrings["happens.readmore"];
+								break;
+
+							case 'image':
+							case 'training':
+							default:
+								article_argument  = translationsStrings["happens.discover"];
+						}
+
+						var string = "<div data-commid=\""+article.id+"\" class=\"happens_block\"><div class=\"happens_img_block\" style=\"background-image: url(" + article_imagePath + ")\" ></div><span class=\"block_title\">" + article_title + "</span><span class=\"block_subtitle\">" + article_text + "</span><a class=\"block_link\">" + article_argument + "</a>";
+
+						$(".happens .happens_middle").append(string);
+						number_display++;
+					}
+				}
+				resizeFrame();
+			}
+
+			$('.happens').delegate('.happens_block', 'click', function() {
+				var commId = $(this).data('commid');
+				if (commId) {
+					ToM.navigation.displayCommunication(commId);
+				}
+			})
+
+			function loadTrainingCourses(learnerCourses, otherCourses) {
+				$(".courses .courses_bottom").html('');
+				$(".courses .courses_bottom").append("<div class=\"add_courses_block\"><svg class=\"svg-icon\" viewBox=\"0 0 183 253\" height=\"183\" width=\"253\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" style=\"fill:white\"> <image xlink:href=\"./img/iconToM-addtraining.svg\" x=\"42\" y=\"76\" height=\"100\" width=\"100\" /> </svg><span class=\"add_courses_title\">"+translationsStrings["courses.enroll"]+"</span></div>");
+				var course;
+				var courses_imagePath    = "";
+				var courses_progress = "";
+				var courses_title = "";
+				var display_courses = 0;
+
+				var displayCourse = function(course) {
+						courses_imagePath = course.cover.url;
+						courses_progress = course.progress || 0;
+
+						courses_title = course.title;
+
+						var block_progress = "";
+						if (courses_progress == 0) {
+							block_progress = "<div class=\"block_progress\"><div class=\"start\"><i class=\"fas fa-play\"></i> Start</div></div>";
+						} else {
+							block_progress = "<div class=\"block_progress\"><div class=\"bar_progress\"><div class=\"background_progress\"></div><div class=\"foreground_progress\"></div></div><span class=\"number_progress\">" + courses_progress + "%</span></div>";
+						}
+
+					$(".courses .courses_bottom").append("<div class=\"courses_block\" data-trainingid=\""+course.id+"\"><img src=" + courses_imagePath + " />" + block_progress + "<span class=\"courses_title\">" + courses_title + "</span>");
+
+						if (courses_progress != 0)
+							$(".courses .courses_bottom .courses_block:eq(" + i + ") .block_progress .bar_progress .foreground_progress").css("width", courses_progress + "%");
+				}
+
+				var learnerCoursesIds = [];
+				for (var i = 0; i < learnerCourses.length; i++) {
+					course = learnerCourses[i];
+					learnerCoursesIds.push(course.id);
+					if (course.sandbox) {
+						continue;
+					}
+					if (display_courses < 7) {
+						displayCourse(course);
+						display_courses++;
+					}
+				}
+				for (var i = 0; i < otherCourses.length; i++) {
+					course = otherCourses[i];
+					if (course.sandbox) {
+						continue;
+					}
+					if (learnerCoursesIds.indexOf(course.id) > -1) {
+						continue;
+					}
+					if (display_courses < 7) {
+						displayCourse(course);
+						display_courses++;
+					}
+				}
+
+				resizeFrame();
+			}
+
+			function loadCoategories(data_categories) {
+				var categories_imagePath = "";
+				var categories_title	 = "";
+				var categories_id		 = "";
+				var display_categories   = 0 ;
+
+
+				for (var i = 0; i < data_categories.length && display_categories <= 4; i++) {
+					if (display_categories < 4) {
+						categories_id		 = data_categories[i].id;
+						categories_imagePath = data_categories[i].image.url;
+						categories_title	 = data_categories[i].title;
+
+						$(".categories .categories_bottom").append("<div class=\"categories_block\" data-catid=" + categories_id +"><img src=" + categories_imagePath + " /><span class=\"categories_title\">" + categories_title + "</span></div>");
+						display_categories++;
+					}
+				}
+				resizeFrame();
+			}
+
+			function catalogPromise() {
+				return new Promise(function(resolve, reject) {
+					var catIds = [];
+					var recursivelyWalkCategories = function(cat) {
+						catIds.push(cat.id);
+						if (cat.children && cat.children.length) {
+							for(var i=0; i < cat.children.length; i++) {
+								catIds.push(cat.children[i].id);
+							}
+						}
+					};
+
+					var cats;
+					ToM.appContent.getCategories().then(function(categories) {
+						cats = categories;
+						for(var i=0; i < categories.length;i++) {
+							recursivelyWalkCategories(categories[i]);
+						}
+
+						var trainingCoursesPromises=[];
+						for(var i=0; i < catIds.length; i++) {
+							trainingCoursesPromises.push(ToM.appContent.getTrainingCoursesForCategory(catIds[i]));
+						}
+
+						Promise.all(trainingCoursesPromises).then(function() {
+							var trainings = [];
+							var i = 0;
+							if (arguments.length > 0) {
+								while (trainings.length < 7 && typeof arguments[0][i] !== 'undefined') {
+									for(var t=0; t < arguments[0][i].length; t++) {
+										trainings.push(arguments[0][i][t]);
+									}
+									i++;
+								}
+							}
+							resolve({categories: cats, trainings: trainings});
+						})
+						.catch(function() {
+							resolve({categories: cats, trainings: []});
+						});
+					})
+					.catch(function() {
+						reject({categories: [], trainings: []});
+					})
+					;
+				});
+			}
+
+			function initLinks() {
+				$('.happens_button').click(ToM.navigation.displayWall);
+				$('body').delegate('.courses_block', 'click', function(el) {
+					var trainingId = $(this).data('trainingid');
+					ToM.navigation.displayTrainingCourse(trainingId);
+				});
+
+				$('body').delegate('.add_courses_block', 'click', function() {
+					ToM.appUtils.showTrainingCourseEnrollment();
+				});
+
+				$('body').delegate('.categories_block', 'click', function() {
+					var catId = $(this).data('catid');
+					ToM.navigation.displayCategory(catId);
+				});
+
+				$('body').delegate('.comm-btn', 'click', function(el) {
+					var commId = $(this).data('commid');
+					ToM.navigation.displayCommunication(commId);
+				});
+			}
+
+			function init() {
+				initLinks();
+
+				var promises = [
+					ToM.learner.getProfile(),
+					ToM.appContent.getFeaturedCommunications(),
+					ToM.appContent.getCommunications(1, 5),
+					catalogPromise(),
+					ToM.appContent.getTrainingCoursesForLearner()
+				];
+
+				Promise.all(promises).then(function(results) {
+					loadProfile(results[0]);
+					loadFeaturedCommunications(results[1]);
+					loadCommunications(results[2]);
+					loadCoategories(results[3].categories);
+					loadTrainingCourses(results[4], results[3].trainings);
+
+				})
+				.catch(function() {
+					console.log(arguments);
+				})
+				;
+
+				$('.header_search').submit(function(event) {
+					event.preventDefault();
+					var searchQuery = $(".header_search input").val();
+					ToM.navigation.displaySearch(searchQuery);
+					return false;
+				});
+
+			}
+
+		</script>
+		<script>
+
+			function displayCarouselTexts($carrouselElement) {
+				$(".carrousel_texts").data("commid", $carrouselElement.data("commid"));
+				$(".presentation").html("<p>" + $carrouselElement.attr("data-titre-presentation") + "</p><div class=\"border-bottom\"></div><p>" + $carrouselElement.attr("data-description-presentation") + "</p>");
+				$(".comm-btn").remove();
+				var buttonText = $carrouselElement.attr("data-button");
+				if (buttonText) {
+					$(".carrousel").append("<button data-commid=\"" + $carrouselElement.attr("data-commid") + "\" class=\"btn-primary comm-btn\">" + buttonText + "</button>");
+				}
+			}
+
+			function initHeaderNavigation() {
+				// Parames de configuration
+				window.chemin_images = "img/";
+				window.delai_slide_auto = 3000;
+				window.largeur_point_navigation = 40;
+
+				window.nom_image_unselected = "points_transparent.png";
+				window.nom_image_selected = "points_noir.png";
+
+
+				// DEBUT DU SCRIPT DU CARROUSEL
+				window.progressWidthImage = 0;
+
+				$(".carrousel .movingCache > img").each(function () {
+					$(".carrousel .progress").append("<img class=\"dot\" src=\"" + chemin_images + nom_image_unselected + "\">");
+					progressWidthImage = progressWidthImage + largeur_point_navigation;
+				});
+
+				$(".carrousel .dot:nth-child(1)").attr("src", chemin_images + nom_image_selected).addClass("selected");
+
+				window.selectedDot = 1;
+				window.clickedDot = 1;
+
+				window.selectedDotFound = false;
+				window.clickedDotFound = false;
+
+				window.dotCountImage = 1;
+
+				var $carrouselElement = $(".movingCache img:nth-child(2)");
+				displayCarouselTexts($carrouselElement);
+
+				var left = -100;
+
+				var automatic = window.setInterval(slideAuto, delai_slide_auto);
+
+				navigationSetter();
+
+
+				function navigationSetter() {
+
+					$(".dot").on("click", function () {
+						$(".next, .previous, .dot").off();
+						window.clearInterval(automatic);
+
+						selectedDot = 1;
+						clickedDot = 1;
+
+						selectedDotFound = false;
+						clickedDotFound = false;
+
+						$(this).addClass("clicked");
+
+						$(".dot").each(function () {
+							if (!$(this).hasClass("selected") && !selectedDotFound) {
+								selectedDot = selectedDot + 1;
+							}
+							else {
+								selectedDotFound = true;
+							}
+
+							if (!$(this).hasClass("clicked") && !clickedDotFound) {
+								clickedDot = clickedDot + 1;
+							}
+							else {
+								clickedDotFound = true;
+							}
+						});
+
+						$(this).removeClass("clicked");
+
+						if (selectedDot > clickedDot) {
+							recursivePreviousSliding(0);
+
+							var imgTarget = 2;
+
+							for (var j = 0; j < selectedDot - clickedDot; j++) {
+								imgTarget = imgTarget - 1;
+
+								if (imgTarget === 0) {
+									imgTarget = $(".dot").length;
+								}
+							}
+
+							$(".carrousel_texts").animate({
+								opacity: 0
+							}, 500, function () {
+
+								var $carrouselElement = $(".movingCache img:nth-child(" + imgTarget + ")");
+								displayCarouselTexts($carrouselElement);
+
+								$(".carrousel_texts").animate({
+									opacity: 1
+								}, 500, function () {
+									automatic = window.setInterval(slideAuto, delai_slide_auto);
+									navigationSetter();
+								});
+							});
+						}
+						else if (selectedDot < clickedDot) {
+							recursiveNextSliding(0);
+
+							var imgTarget = 2;
+
+							for (var j = 0; j < clickedDot - selectedDot; j++) {
+								imgTarget = imgTarget + 1;
+
+								if (imgTarget > $(".dot").length) {
+									imgTarget = 1;
+								}
+							}
+
+
+							$(".carrousel_texts").animate({
+								opacity: 0
+							}, 500, function () {
+
+								var $carrouselElement = $(".movingCache img:nth-child(" + imgTarget + ")");
+								displayCarouselTexts($carrouselElement);
+
+								$(".carrousel_texts").animate({
+									opacity: 1
+								}, 500, function () {
+									automatic = window.setInterval(slideAuto, delai_slide_auto);
+									navigationSetter();
+								});
+							});
+						}
+					});
+
+					$(".carrousel .next").click(function () {
+						dotCountImage = dotCountImage + 1;
+
+						if (dotCountImage > $(".carrousel .progress .dot").length) {
+							dotCountImage = 1;
+						}
+
+						$(".carrousel .dot").attr("src", chemin_images + nom_image_unselected).removeClass("selected");
+						$(".carrousel .dot:nth-child(" + dotCountImage + ")").attr("src", chemin_images + nom_image_selected).addClass("selected");
+
+						$(".carrousel_texts").animate({
+							opacity: 0
+						}, 500, function () {
+
+							var $carrouselElement = $(".movingCache img:nth-child(3)");
+							displayCarouselTexts($carrouselElement);
+
+							$(".carrousel_texts").animate({
+								opacity: 1
+							}, 500);
+						});
+					});
+
+					$(".carrousel .previous").click(function () {
+						dotCountImage = dotCountImage - 1;
+
+						if (dotCountImage < 1) {
+							dotCountImage = $(".carrousel .progress .dot").length;
+						}
+
+						$(".carrousel .dot").attr("src", chemin_images + nom_image_unselected).removeClass("selected");
+						$(".carrousel .dot:nth-child(" + dotCountImage + ")").attr("src", chemin_images + nom_image_selected).addClass("selected");
+
+						$(".carrousel_texts").animate({
+							opacity: 0
+						}, 500, function () {
+							var $carrouselElement = $(".movingCache img:nth-child(1)");
+							displayCarouselTexts($carrouselElement);
+
+							$(".carrousel_texts").animate({
+								opacity: 1
+							}, 500);
+						});
+					});
+
+					$(".next").on("click", function () {
+						$(".next, .previous, .dot").off();
+						window.clearInterval(automatic);
+
+						left = left - 100;
+						$(this).siblings(".wrapper").children(".movingCache").animate({
+							left: left + "%"
+						}, 1000, function () {
+							$(this).append($(this).children("*:first"));
+							left = left + 100;
+							$(this).css("left", left + "%");
+							automatic = window.setInterval(slideAuto, delai_slide_auto);
+							navigationSetter();
+						});
+					});
+
+					$(".previous").on("click", function () {
+						$(".next, .previous, .dot").off();
+						window.clearInterval(automatic);
+
+						left = left + 100;
+						$(this).siblings(".wrapper").children(".movingCache").animate({
+							left: left + "%"
+						}, 1000, function () {
+							$(this).prepend($(this).children("*:last"));
+							left = left - 100;
+							$(this).css("left", left + "%");
+							automatic = window.setInterval(slideAuto, delai_slide_auto);
+							navigationSetter();
+						});
+					});
+				}
+			}
+
+			function slideAuto() {
+				$(".next").click();
+			}
+
+			function recursivePreviousSliding(i) {
+				left = 0;
+
+				$(".wrapper").children(".movingCache").animate({
+					left: left + "%"
+				}, 1000 / (selectedDot - clickedDot), 'linear', function () {
+					$(this).prepend($(this).children("*:last"));
+					left = - 100;
+					$(this).css("left", left + "%");
+
+					dotCountImage = dotCountImage - 1;
+
+					$(".dot").attr("src", chemin_images + nom_image_unselected).removeClass("selected");
+					$(".dot:nth-child(" + dotCountImage + ")").attr("src", chemin_images + nom_image_selected).addClass("selected");
+
+					var cpt = i + 1;
+					if (cpt < selectedDot - clickedDot) {
+						recursivePreviousSliding(cpt);
+					}
+				});
+			}
+
+			function recursiveNextSliding(i) {
+				left = -200;
+
+				$(".wrapper").children(".movingCache").animate({
+					left: left + "%"
+				}, 1000 / (clickedDot - selectedDot), 'linear', function () {
+					$(this).append($(this).children("*:first"));
+					left = - 100;
+					$(this).css("left", left + "%");
+
+					dotCountImage = dotCountImage + 1;
+
+					$(".dot").attr("src", chemin_images + nom_image_unselected).removeClass("selected");
+					$(".dot:nth-child(" + dotCountImage + ")").attr("src", chemin_images + nom_image_selected).addClass("selected");
+
+					var cpt = i + 1;
+					if (cpt < clickedDot - selectedDot) {
+						recursiveNextSliding(cpt);
+					}
+				});
+			}
+
+			$(".header").remove(".header_right");
+
+		</script>
+	</body>
+</html>
