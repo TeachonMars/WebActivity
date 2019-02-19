@@ -1,4 +1,4 @@
-# WebActivity
+# Web activity
 ## Introduction
 Teach on Mars offers a wide variety of mobile learning activities including courses, quizzes and games, and we regularly create new ones... but you may want more, right now! Good news, it is possible! With Teach on Mars, you can import a web content in a Teach on Mars training course just like any other activity. 
  
