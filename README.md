@@ -60,4 +60,4 @@ then the URL to access the simulator should be
 
 When opening the simulator, the first screen is an example of a content loaded in the simulator. This content is a smal tutorial that explains how to send and get data to and from the Mission Center.
 
-
+There is another example containing a 360 video that can be found in the _examples/360-video_ directory. Just load _../examples/360-video/_ in the _Content URL_ input and hit _Load_.

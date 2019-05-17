@@ -165,6 +165,7 @@ function initInterface() {
     };
 
     var closeActivity = function() {
+      window.top.closeContent();
       console.log("Closing activity...");
     };
 
