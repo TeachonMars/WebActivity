@@ -53,6 +53,17 @@
 <script type="text/javascript">
 
     var contentUrl = "../examples/simple-calls/";
+    var storedValues = fetchValues();
+
+    if (storedValues.contentUrl) {
+        contentUrl = atob(storedValues.contentUrl);
+    }
+    if (storedValues.width) {
+        $("#frame-width-input").val(storedValues.width);
+    }
+    if (storedValues.height) {
+        $("#frame-height-input").val(storedValues.height);
+    }
 
     $("#content-url-input").val(contentUrl);
     loadContent();
@@ -70,11 +81,43 @@
     $('form#frame-form').submit(function(e) {
         e.preventDefault();
         SetIframeSize();
+        rememberFormValues();
     });
 
     function loadContent() {
         var src = $("#content-url-input").val();
         $("#contentIframe").attr("src", src);
+    }
+
+    function rememberFormValues() {
+        rememberValues({
+            contentUrl: btoa($("#content-url-input").val()),
+            width: $("#frame-width-input").val(),
+            height: $("#frame-height-input").val()
+        });
+    }
+
+    function rememberValues(values) {
+        var cookievalue = "";
+        for(name in values) {
+            cookievalue = name+"="+values[name]+";";
+            document.cookie = cookievalue;
+        }
+    }
+
+    function fetchValues() {
+        // Get all the cookies pairs in an array
+        var values = {},name,value;
+        var cookiearray = document.cookie.split(';');
+
+        // Now take key value pair out of this array
+        for(var i=0; i<cookiearray.length; i++) {
+            var parts = cookiearray[i].split('=');
+            name = parts.shift();
+            value = parts.join("=");
+            values[name.trim()] = value;
+        }
+        return values;
     }
 
     window.closeContent = function() {
@@ -84,6 +127,7 @@
     $('form#content-form').submit(function(e) {
         e.preventDefault();
         loadContent();
+        rememberFormValues();
     });
 
     $('#close-btn').click(closeContent);
