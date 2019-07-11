@@ -15,6 +15,7 @@
               <a class="list-group-item list-group-item-action " data-toggle="list" href="#list-example-1" role="tab">Ex 1</a>
               <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-example-2" role="tab">Ex 2</a>
               <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-example-3" role="tab">Ex 3</a>
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-example-4" role="tab">Ex 4</a>
             </div>
         </div>
         <div class="col-9">
@@ -45,6 +46,12 @@
                     <div class="mt-2"><button class="btn btn-success script-btn" data-script="scriptThree">Launch</button></div>
                     <pre class="mt-2" id="codeThree"></pre>
                 </div>
+                <div class="tab-pane fade" id="list-example-4" role="tabpanel" aria-labelledby="list-profile-list">
+                    <h5>Example 4 - quit</h5>
+                    <code ></code>
+                    <div class="mt-2"><button class="btn btn-success script-btn" data-script="scriptFour">Launch</button></div>
+                    <pre class="mt-2" id="codefour"></pre>
+                </div>
             </div>
         </div>
     </div>
@@ -53,32 +60,36 @@
         window.ToM = window.ToM || (window.top && window.top.ToM);
 
         var scripts = {
-scriptOne:
-function() {
-    ToM.data.init();
-    ToM.data.set('time', 30);
-    ToM.data.send();
-},
+            scriptOne:
+            function() {
+                ToM.data.init();
+                ToM.data.set('time', 30);
+                ToM.data.send();
+            },
 
-scriptTwo:
-function() {
-    ToM.data.init();
-    ToM.data.set('time', 30);
-    ToM.data.set('progress', 60);
-    ToM.data.send();
-},
+            scriptTwo:
+            function() {
+                ToM.data.init();
+                ToM.data.set('time', 30);
+                ToM.data.set('progress', 60);
+                ToM.data.send();
+            },
 
-scriptThree:
-function() {
-    ToM.data.init();
-    var data = {
-        time: ToM.data.get('time'),
-        progress: ToM.data.get('progress'),
-        score: ToM.data.get('score'),
-        points: ToM.data.get('points')
-    };
-    $('#codeThree').text(JSON.stringify(data, null, 4));
-}
+            scriptThree:
+            function() {
+                ToM.data.init();
+                var data = {
+                    time: ToM.data.get('totalTime'),
+                    progress: ToM.data.get('progress'),
+                    score: ToM.data.get('score'),
+                    success: ToM.data.get('success')
+                };
+                $('#codeThree').text(JSON.stringify(data, null, 4));
+            },
+            scriptFour:
+                function() {
+                    ToM.utils.close();
+                }
 };
 
         $(".script-btn").each(function() {
