@@ -1,3 +1,7 @@
+window.env = {
+    "contentLanguage": "en"
+};
+
 window.learnerProfile = {
     "learnerId": "AAAAA",
     "firstname": "Jenny",

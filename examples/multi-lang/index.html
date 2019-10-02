@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        window.ToM = window.ToM || (window.top && window.top.ToM) || {};
+
+        var lang = ToM.env.get("CONTENT_LANGUAGE");
+        window.location.href = lang+"/";
+    });
+</script>
+</body>
+</html>

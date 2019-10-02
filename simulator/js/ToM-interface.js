@@ -196,6 +196,9 @@ function initInterface() {
         case "LANGUAGE":
           return window.learnerProfile.lang;
 
+        case "CONTENT_LANGUAGE":
+          return window.env.contentLanguage;
+
         case "time":
         case "points":
         case "score":
