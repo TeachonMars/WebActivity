@@ -17,7 +17,7 @@ Usage data like progress, score, success and time spent in your web activity can
 
 You will find more detailed information in the [Web activity documentation](https://github.com/TeachonMars/WebActivity/raw/master/doc/ToM%20Web%20Activity%20documentation.pdf).
 
-## Walk through
+## Simulator Walk through
 ### Requirements
 * Any Git client
 * A local web server
