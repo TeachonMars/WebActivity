@@ -1,6 +1,6 @@
 # Web activity
 ## Before we start
-If you have any question related to web activities, or any other kind of integration with Teach on Mars, please consider joining the [Teach on Mars Integration slack community](https://join.slack.com/t/integration-on-mars/shared_invite/enQtNTc1NTQxODA3NTcwLTNiM2E3N2FhYjkzY2VjMmExYjRhOTkyNDhhZjNmNzQ5MzRiMzkwYzU5OWY3NjgxNmI3OWNlNjcyYjg1YWRjZmI).
+If you have any question related to web activities, or any other kind of integration with Teach on Mars, please consider joining the [Teach on Mars Integration slack community](https://join.slack.com/t/integration-on-mars/shared_invite/enQtNTc1NTQxODA3NTcwLTFkY2FmMGU3NTEzZTU1NTI2NWIwN2M5MGNiZjUxZTkwM2I4MDZkNzZkNzM4MjMzMWQ1ZGUwZDRhZjAzNDRjMDE).
 
 ## Introduction
 Teach on Mars offers a wide variety of mobile learning activities including courses, quizzes and games, and we regularly create new ones... but you may want more, right now! Good news, it is possible! With Teach on Mars, you can import a web content in a Teach on Mars training course just like any other activity. 
