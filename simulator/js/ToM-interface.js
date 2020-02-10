@@ -183,7 +183,7 @@ function initInterface() {
 
       if (!window.sessionVars) {
         console.error("Session not initiated");
-        return;
+        initSession();
       }
 
       window.sessionVars[key] = value;
@@ -213,10 +213,11 @@ function initInterface() {
       console.log("Sending session...", window.sessionVars);
       if (!window.sessionVars.time) {
         window.sessionVars.time = Math.floor((new Date().getTime()) / 1000) - window.sessionStarted;
-        window.sessionStarted = null;
       }
+      window.sessionVars.createdAt = (new Date(window.sessionStarted)).toTimeString().substr(0, 8);
       window.top.pushSession(window.sessionVars);
       window.sessionVars = null;
+      window.sessionStarted = null;
     };
 
     return {
