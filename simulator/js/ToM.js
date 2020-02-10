@@ -1,67 +1,67 @@
 var ToM =
 /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
+/******/   // The module cache
+/******/   var installedModules = {};
 /******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
+/******/   // The require function
+/******/   function __webpack_require__(moduleId) {
 /******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
+/******/     // Check if module is in cache
+/******/     if(installedModules[moduleId]) {
+/******/       return installedModules[moduleId].exports;
+/******/     }
+/******/     // Create a new module (and put it into the cache)
+/******/     var module = installedModules[moduleId] = {
+/******/       i: moduleId,
+/******/       l: false,
+/******/       exports: {}
+/******/     };
 /******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/     // Execute the module function
+/******/     modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
+/******/     // Flag the module as loaded
+/******/     module.l = true;
 /******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
+/******/     // Return the exports of the module
+/******/     return module.exports;
+/******/   }
 /******/
 /******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
+/******/   // expose the modules object (__webpack_modules__)
+/******/   __webpack_require__.m = modules;
 /******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
+/******/   // expose the module cache
+/******/   __webpack_require__.c = installedModules;
 /******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
+/******/   // define getter function for harmony exports
+/******/   __webpack_require__.d = function(exports, name, getter) {
+/******/     if(!__webpack_require__.o(exports, name)) {
+/******/       Object.defineProperty(exports, name, {
+/******/         configurable: false,
+/******/         enumerable: true,
+/******/         get: getter
+/******/       });
+/******/     }
+/******/   };
 /******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
+/******/   // getDefaultExport function for compatibility with non-harmony modules
+/******/   __webpack_require__.n = function(module) {
+/******/     var getter = module && module.__esModule ?
+/******/       function getDefault() { return module['default']; } :
+/******/       function getModuleExports() { return module; };
+/******/     __webpack_require__.d(getter, 'a', getter);
+/******/     return getter;
+/******/   };
 /******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/   // Object.prototype.hasOwnProperty.call
+/******/   __webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/   // __webpack_public_path__
+/******/   __webpack_require__.p = "";
 /******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/   // Load entry module and return exports
+/******/   return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -322,7 +322,7 @@ var TomInterface = function () {
   }, {
     key: 'resolveIOSPromise',
     value: function resolveIOSPromise(promiseId, data, error) {
-      console.log("interface.resolveIOSPromise", promiseId, data, error);
+      console.log('interface.resolveIOSPromise', promiseId, data, error);
       if (promises[promiseId]) {
         if (error) {
           promises[promiseId].reject(data);
@@ -405,16 +405,16 @@ var g;
 
 // This works in non-strict mode
 g = (function() {
-	return this;
+  return this;
 })();
 
 try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
+  // This works if eval is allowed (see CSP)
+  g = g || Function("return this")() || (1,eval)("this");
 } catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
+  // This works if the window reference is available
+  if(typeof window === "object")
+    g = window;
 }
 
 // g can still be undefined, but nothing to do about it...
@@ -612,14 +612,14 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _tom_interface = __webpack_require__(0);
 
-__webpack_require__(13);
+__webpack_require__(14);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var _lib = 'utils';
 
 var event = new CustomEvent('beforeunload');
-event.initCustomEvent("beforeunload", true, true, undefined);
+event.initCustomEvent('beforeunload', true, true, undefined);
 
 var Utils = function () {
   function Utils() {
@@ -627,31 +627,31 @@ var Utils = function () {
   }
 
   _createClass(Utils, [{
-    key: "enableWakeLock",
+    key: 'enableWakeLock',
     value: function enableWakeLock() {
       console.log('utils.enableWakeLock');
       return (0, _tom_interface.call)(_lib, 'enableWakeLock');
     }
   }, {
-    key: "disableWakeLock",
+    key: 'disableWakeLock',
     value: function disableWakeLock() {
       console.log('utils.disableWakeLock');
       return (0, _tom_interface.call)(_lib, 'disableWakeLock');
     }
   }, {
-    key: "isSandbox",
+    key: 'isSandbox',
     value: function isSandbox() {
       console.log('utils.isSandbox');
       return (0, _tom_interface.call)(_lib, 'isSandbox');
     }
   }, {
-    key: "close",
+    key: 'close',
     value: function close() {
       console.log('utils.close');
       return (0, _tom_interface.call)(_lib, 'close');
     }
   }, {
-    key: "notifyWebViewClosing",
+    key: 'notifyWebViewClosing',
     value: function notifyWebViewClosing(currentWindow) {
       console.log('utils.notifyWebViewClosing', currentWindow);
       currentWindow = currentWindow || window.top;
@@ -663,7 +663,7 @@ var Utils = function () {
       }
     }
   }, {
-    key: "resolveIOSPromise",
+    key: 'resolveIOSPromise',
     value: function resolveIOSPromise(promiseId, data, error) {
       console.log('utils.resolveIOSPromise', promiseId, data, error);
       (0, _tom_interface.resolveIOSPromise)(promiseId, data, error);
@@ -733,11 +733,15 @@ var _home = __webpack_require__(12);
 
 var _home2 = _interopRequireDefault(_home);
 
+var _callback = __webpack_require__(13);
+
+var _callback2 = _interopRequireDefault(_callback);
+
 var _utils = __webpack_require__(5);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _params = __webpack_require__(14);
+var _params = __webpack_require__(15);
 
 var _params2 = _interopRequireDefault(_params);
 
@@ -753,27 +757,28 @@ var _navigation = __webpack_require__(4);
 
 var _navigation2 = _interopRequireDefault(_navigation);
 
-var _learner = __webpack_require__(15);
+var _learner = __webpack_require__(16);
 
 var _learner2 = _interopRequireDefault(_learner);
 
-var _appUtils = __webpack_require__(16);
+var _appUtils = __webpack_require__(17);
 
 var _appUtils2 = _interopRequireDefault(_appUtils);
 
-var _scorm_adapter = __webpack_require__(17);
+var _scorm_adapter = __webpack_require__(18);
 
 var _tom_interface = __webpack_require__(0);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var version = "1.0.1";
+var version = '1.2.1';
 module.exports = {
   version: version,
   initInterface: _tom_interface.initInterface,
   initScorm: initScorm,
   data: new _data2.default(),
   home: new _home2.default(),
+  callback: new _callback2.default(),
   utils: new _utils2.default(),
   params: new _params2.default(),
   env: new _env2.default(),
@@ -781,7 +786,6 @@ module.exports = {
   navigation: new _navigation2.default(),
   learner: new _learner2.default(),
   appUtils: new _appUtils2.default()
-
 };
 
 function initScorm(scormEnabled) {
@@ -790,6 +794,7 @@ function initScorm(scormEnabled) {
     window.API_1484_11 = _scorm_adapter.ScormAPI2004;
   }
 }
+
 initScorm();
 
 /***/ }),
@@ -803,7 +808,7 @@ initScorm();
   var setTimeoutFunc = setTimeout;
 
   function noop() {}
-  
+
   // Polyfill for Function.prototype.bind
   function bind(fn, thisArg) {
     return function () {
@@ -1021,7 +1026,7 @@ initScorm();
   Promise._setUnhandledRejectionFn = function _setUnhandledRejectionFn(fn) {
     Promise._unhandledRejectionFn = fn;
   };
-  
+
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = Promise;
   } else if (!root.Promise) {
@@ -1523,41 +1528,67 @@ var Home = function () {
   }
 
   _createClass(Home, [{
-    key: "getCategories",
+    key: 'getCategories',
     value: function getCategories() {
       console.warn('ToM.home.getCategories is deprecated, please use ToM.appContent.getCategories() instead');
       return appComponent.getCategories();
     }
   }, {
-    key: "displayCategory",
+    key: 'displayCategory',
     value: function displayCategory(categoryId) {
       console.warn('ToM.home.displayCategory is deprecated, please use ToM.navigation.displayCategory() instead');
       return navigation.displayCategory(categoryId);
     }
   }, {
-    key: "getCategory",
+    key: 'getCategory',
     value: function getCategory(categoryId) {
       console.warn('ToM.home.getCategory is deprecated, please use ToM.appContent.getCategory() instead');
       return appComponent.getCategory(categoryId);
     }
   }, {
-    key: "isShakeAndLearnPossible",
+    key: 'isShakeAndLearnPossible',
     value: function isShakeAndLearnPossible() {
       console.log('home.isShakeAndLearnPossible');
       return (0, _tom_interface.call)(_lib, 'isShakeAndLearnPossible');
     }
   }, {
-    key: "shakeAndLearn",
+    key: 'shakeAndLearn',
     value: function shakeAndLearn() {
       console.log('home.shakeAndLearn');
       return (0, _tom_interface.call)(_lib, 'shakeAndLearn');
     }
   }, {
-    key: "reload",
+    key: 'beforeHomeDisplayed',
+    value: function beforeHomeDisplayed() {
+      console.log('home.beforeHomeDisplayed');
+      return window.ToM.callback.beforeHomeDisplayed();
+    }
+  }, {
+    key: 'beforeAppBackground',
+    value: function beforeAppBackground() {
+      console.log('home.beforeAppBackground');
+      return window.ToM.callback.beforeAppBackground();
+    }
+  }, {
+    key: 'beforeAppForeground',
+    value: function beforeAppForeground() {
+      console.log('home.beforeAppForeground');
+      return window.ToM.callback.beforeAppForeground();
+    }
+  }, {
+    key: 'onDataUpdated',
+    value: function onDataUpdated(type) {
+      console.log('home.onDataUpdated', type);
+      return window.ToM.callback.onDataUpdated(type);
+    }
+  }, {
+    key: 'reload',
     value: function reload() {
-      console.log('home.reload');
+      console.warn('ToM.home.reload is deprecated, please use ToM.home.beforeHomeDisplayed');
       if (window.reloadData && typeof window.reloadData === 'function') {
         window.reloadData();
+      } else {
+        return this.beforeHomeDisplayed();
       }
     }
   }]);
@@ -1569,6 +1600,55 @@ exports.default = Home;
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var _lib = 'callback';
+
+var Callback = function () {
+  function Callback() {
+    _classCallCheck(this, Callback);
+  }
+
+  _createClass(Callback, [{
+    key: 'beforeHomeDisplayed',
+    value: function beforeHomeDisplayed() {
+      console.log('Default ToM.callback.beforeHomeDisplayed implementation called');
+    }
+  }, {
+    key: 'beforeAppBackground',
+    value: function beforeAppBackground() {
+      console.log('Default ToM.callback.beforeAppBackground implementation called');
+    }
+  }, {
+    key: 'beforeAppForeground',
+    value: function beforeAppForeground() {
+      console.log('Default ToM.callback.beforeAppForeground implementation called');
+    }
+  }, {
+    key: 'onDataUpdated',
+    value: function onDataUpdated(type) {
+      console.log('Default ToM.callback.onDataUpdated("' + type + '") implementation called');
+    }
+  }]);
+
+  return Callback;
+}();
+
+exports.default = Callback;
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports) {
 
 // Polyfill for creating CustomEvents on IE9/10/11
@@ -1629,7 +1709,7 @@ exports.default = Home;
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1672,7 +1752,7 @@ var Params = function () {
 exports.default = Params;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1709,7 +1789,7 @@ var Learner = function () {
 exports.default = Learner;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1752,7 +1832,7 @@ var AppUtils = function () {
 exports.default = AppUtils;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1815,7 +1895,9 @@ var mapping = {
       'cmi.mode': 'mode',
       'cmi.exit': 'exit',
       'cmi.suspend_data': 'suspendData',
-      'adl.nav.request': 'adlNavRequest'
+      'adl.nav.request': 'adlNavRequest',
+      'tom.data.session_points': 'sessionPoint',
+      'tom.data.total_points': 'totalPoint'
     },
     'error': {
       0: 'No Error',
@@ -1856,7 +1938,9 @@ var mapping = {
       'cmi.core.lesson_location': 'location',
       'cmi.core.lesson_mode': 'mode',
       'cmi.core.exit': 'exit',
-      'cmi.suspend_data': 'suspendData'
+      'cmi.suspend_data': 'suspendData',
+      'tom.data.session_points': 'sessionPoint',
+      'tom.data.total_points': 'totalPoint'
     },
     'error': {
       0: 'No Error',
@@ -1881,7 +1965,7 @@ function getKeyByValue(object, value) {
 }
 
 function convertSecondsToScorm2004Time(time) {
-  var resultTime = "P";
+  var resultTime = 'P';
   var years = Math.floor(time / 31536000),
       months = Math.floor(time % 31536000 / 2592000),
       days = Math.floor(time % 31536000 % 2592000 / 86400),
@@ -1913,7 +1997,7 @@ function convertScorm2004TimeToSeconds(time) {
 }
 
 function convertSecondsToScorm12Time(time) {
-  var resultTime = "P";
+  var resultTime = 'P';
   var hours = Math.floor(time / 3600),
       minutes = Math.floor(time % 3600 / 60),
       seconds = time % 3600 % 60;
@@ -1948,7 +2032,7 @@ var ScormAPI = function () {
       console.log('ScormAPI.initialize', scormVersion);
       _initialized = true;
       _finished = false;
-      return data.init();
+      return data.init() ? 'true' : 'false';
     }
   }, {
     key: 'terminate',
@@ -1957,7 +2041,7 @@ var ScormAPI = function () {
       _initialized = false;
       _finished = true;
       data.send();
-      return utils.close();
+      return utils.close() ? 'true' : 'false';
     }
   }, {
     key: 'get',
@@ -1974,7 +2058,7 @@ var ScormAPI = function () {
         _lastErrorCode = 0;
         _lastErrorString = 'No Error';
         var progress = 0,
-            location = "",
+            location = '',
             success = 0,
             score = 0;
         switch (mappedDataModel) {
@@ -1987,16 +2071,19 @@ var ScormAPI = function () {
             return env.get('LEARNER_ID');
 
           case 'learnerName':
-            return env.get('LAST_NAME') + ", " + env.get('FIRST_NAME');
+            return env.get('LAST_NAME') + ', ' + env.get('FIRST_NAME');
 
           case 'learnerLang':
             return env.get('LANGUAGE');
 
+          case 'totalPoint':
+            return data.get('totalPoints') || 0;
+
           case 'totalTime':
             var totalTime = data.get('totalTime') || 0;
-            if (scormVersion === "ScormAPI2004") {
+            if (scormVersion === 'ScormAPI2004') {
               return convertSecondsToScorm2004Time(totalTime);
-            } else if (scormVersion === "ScormAPI12") {
+            } else if (scormVersion === 'ScormAPI12') {
               return convertSecondsToScorm12Time(totalTime);
             } else {
               return 0;
@@ -2043,7 +2130,7 @@ var ScormAPI = function () {
 
           case 'location':
             location = data.get('location');
-            return location ? location : "";
+            return location ? location : '';
 
           case 'mode':
             return 'normal'; //“browse”, “normal”, “review”
@@ -2083,32 +2170,39 @@ var ScormAPI = function () {
       var dataModelMapping = mapping[scormVersion].dataModel;
       if (!_initialized || _finished) {
         _lastErrorCode = 301;
-        return '';
+        return 'false';
       }
       if (dataModelMapping.hasOwnProperty(key)) {
         var mappedDataModel = dataModelMapping[key];
         _lastErrorCode = 0;
         _lastErrorString = 'No Error';
+        var res = null;
         switch (mappedDataModel) {
           case null:
             _lastErrorCode = 401;
             _lastErrorString = 'Not implemented error';
-            return '';
+            return 'false';
 
           // case 'learnerLang':
           //  return utils.getEnv('LANG');
 
           case 'sessionTime':
-            if (scormVersion === "ScormAPI2004") {
-              return data.set('time', convertScorm2004TimeToSeconds(value));
-            } else if (scormVersion === "ScormAPI12") {
-              return data.set('time', convertScorm12TimeToSeconds(value));
+            if (scormVersion === 'ScormAPI2004') {
+              res = data.set('time', convertScorm2004TimeToSeconds(value));
+            } else if (scormVersion === 'ScormAPI12') {
+              res = data.set('time', convertScorm12TimeToSeconds(value));
             } else {
-              return 0;
+              res = 0;
             }
+            break;
+
+          case 'sessionPoint':
+            res = data.set('points', value);
+            break;
 
           case 'progress':
-            return data.set('progress', value * 100);
+            res = data.set('progress', value * 100);
+            break;
 
           case 'success':
             var success = false;
@@ -2118,31 +2212,38 @@ var ScormAPI = function () {
             } else if (value === 'failed') {
               data.set('progress', 100);
             }
-            return data.set('success', success);
+            res = data.set('success', success);
+            break;
 
           case 'completion':
             var progress = 0;
             if (value === 'completed') {
               progress = 100;
             }
-            return data.set('progress', progress);
+            res = data.set('progress', progress);
+            break;
 
           case 'scoreMin':
             console.error('scoreMin not implemented yet, default value setted: 0');
-            return parseFloat('0').toFixed(7);
+            res = parseFloat('0').toFixed(7);
+            break;
 
           case 'scoreMax':
             console.error('scoreMin not implemented yet, default value setted: 100');
-            return parseFloat('100').toFixed(7);
+            res = parseFloat('100').toFixed(7);
+            break;
 
           case 'scoreRaw':
-            return data.set('score', value);
+            res = data.set('score', value);
+            break;
 
           case 'scoreScaled':
-            return data.set('score', value * 100);
+            res = data.set('score', value * 100);
+            break;
 
           case 'exit':
-            return data.set('exit', value);
+            res = data.set('exit', value);
+            break;
 
           case 'adlNavRequest':
             switch (value) {
@@ -2159,32 +2260,41 @@ var ScormAPI = function () {
             }
 
             data.send();
-            return utils.close();
+            res = utils.close();
+            break;
 
           case 'suspendData':
-            return data.set('suspendData', value);
+            res = data.set('suspendData', value);
+            break;
 
           case 'location':
-            return data.set('location', value);
+            res = data.set('location', value);
+            break;
 
           default:
             _lastErrorCode = 404;
             _lastErrorString = 'Data Model ' + getKeyByValue(dataModelMapping, mappedDataModel) + ' is Read Only';
             console.error('Data Model Element Is Read Only (404)');
-            return '';
+            return 'false';
+        }
+
+        if (res !== undefined && res !== null) {
+          return 'true';
+        } else {
+          return 'false';
         }
       } else {
         _lastErrorCode = 201;
         _lastErrorString = 'Invalid argument error';
         console.error('property ' + key + ' not supported');
-        return '';
+        return 'false';
       }
     }
   }, {
     key: 'commit',
     value: function commit(scormVersion) {
       console.log('ScormAPI.commit', scormVersion);
-      return true;
+      return 'true';
     }
   }, {
     key: 'getLastError',

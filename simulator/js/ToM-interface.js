@@ -173,6 +173,7 @@ function initInterface() {
       window.sessionVars = {};
       window.sessionStarted = Math.floor((new Date().getTime()) / 1000);
       console.log("Session initiated");
+      return true;
     };
 
 
@@ -187,6 +188,7 @@ function initInterface() {
       }
 
       window.sessionVars[key] = value;
+      return true;
     };
 
     var getVar = function(params) {
@@ -205,7 +207,7 @@ function initInterface() {
         case "progress":
         case "success":
         case "suspendData":
-          return window.top.reducedSessions[key];
+          return window.top.reducedSessions[key] ? window.top.reducedSessions[key] : "" ;
       }
     };
 
