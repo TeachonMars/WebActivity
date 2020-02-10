@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <script type="text/javascript" src="./data/data.js"></script>
+</head>
+<body style="background:black;">
+    <div class="close-button "style=""></div>
+    <iframe id="tl-frame" width="768" height="360" data-original-width="640" data-original-height="360" src="" type="text/html" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen scrolling="no"></iframe>
+
+    <script async src="//cdn.thinglink.me/jse/responsive.js"></script>
+    <style type="text/css">
+        .close-button {
+            position:absolute;
+            top: 5px;
+            right:10px;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            background-image: url("close.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+        }
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+
+        $(function() {
+            window.ToM = window.ToM || (window.top && window.top.ToM);
+            ToM.data.init();
+
+            window.addEventListener("unload", function (event) {
+                if (!window.progressSent) {
+                    sendTracking();
+                }
+            });
+            window.addEventListener("beforeunload", function (event) {
+                if (!window.progressSent) {
+                    sendTracking();
+                }
+            });
+
+            function sendTracking() {
+                window.progressSent = true;
+                ToM.data.set('progress', 100);
+                ToM.data.send();
+            }
+
+            $(".close-button").click(function() {
+                sendTracking();
+                ToM.utils.close();
+            });
+
+            $(window).on("resize", function(e) {
+                console.log("resize", e);
+                displayFrame();
+            });
+            $(window).on("orientationchange", function(e) {
+                console.log("orientationchange", e);
+            });
+
+            function displayFrame() {
+
+                var height = $(window).innerHeight() - 10;
+                var width = $(window).innerWidth();
+                console.log("height", height, "width", width);
+                $("#tl-frame").attr("src", "");
+                $("#tl-frame").attr("width", width).attr("height", height).attr("src", window.TL.url);
+            }
+            displayFrame();
+        });
+    </script>
+</body>
+</html>
