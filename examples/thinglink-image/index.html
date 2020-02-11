@@ -49,6 +49,10 @@
 
             function sendTracking() {
                 window.progressSent = true;
+                var previousProgress = ToM.data.get("progress");
+                if (previousProgress != 100 && window.TL.points && window.TL.points === parseInt(window.TL.points, 10)) {
+                    ToM.data.set("points", window.TL.points);
+                }
                 ToM.data.set('progress', 100);
                 ToM.data.send();
             }
@@ -59,7 +63,6 @@
             });
 
             $(window).on("resize", function(e) {
-                console.log("resize", e);
                 displayFrame();
             });
             $(window).on("orientationchange", function(e) {
@@ -70,7 +73,6 @@
 
                 var height = $(window).innerHeight() - 10;
                 var width = $(window).innerWidth();
-                console.log("height", height, "width", width);
                 $("#tl-frame").attr("src", "");
                 $("#tl-frame").attr("width", width).attr("height", height).attr("src", window.TL.url);
             }

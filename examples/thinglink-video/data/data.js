@@ -1,3 +1,4 @@
 window.TL = {
-    url: "https://www.thinglink.com/videocard/1214934908426780677"
+    url: "https://www.thinglink.com/videocard/1214934908426780677",
+    points: 0
 };
