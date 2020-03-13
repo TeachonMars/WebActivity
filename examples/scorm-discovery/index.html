@@ -1,0 +1,58 @@
+<!DOCTYPE html><html dir="auto">
+<head>
+  <meta charset="utf-8">
+  <title>SCORM Discovery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <script type="text/javascript" src="./ToMScormHelper.js"></script>
+</head>
+<body>
+    <pre id="report"></pre>
+    <p>This is an example of discovery algorithms that work on the Teach on Mars platform. Take a look at our <a href="https://github.com/TeachonMars/WebActivity/" target="_blank">github</a> to download the helper file.</p>
+    <script type="text/javascript">
+    function appendToReport(txt) {
+        var reportElement = window.document.getElementById("report");
+        reportElement.innerHTML+="\n"+txt;
+    }
+    window.addEventListener("load", function () {
+        init();
+    })
+    window.addEventListener("beforeunload", function () {
+        finish();
+    });
+
+    var discoveryProgress = 0;
+
+    var SCORM_2004_API = window.ToMScormHelper.get2004Api(window);
+    if (SCORM_2004_API !== null) {
+        appendToReport("SCORM 2004 API found!");
+    }
+    else {
+        appendToReport("SCORM 2004 API not found.");
+    }
+
+    var SCORM_12_API = window.ToMScormHelper.get12Api(window);
+    if (SCORM_12_API !== null) {
+        appendToReport("SCORM 1.2 API found!");
+    }
+    else {
+        appendToReport("SCORM 1.2 API not found.");
+    }
+
+    if (ToM !== null && ToM.data !== null) {
+        appendToReport("ToM JS lib found!");
+    }
+    else {
+        appendToReport("ToM JS lib not found.");
+    }
+
+  </script>
+  <style type="text/css">
+      p {
+        font-family: sans-serif;
+        padding: 10px;
+        background-color: #e8e8e8;
+      }
+  </style>
+</body></html>
