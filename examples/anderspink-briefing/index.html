@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Briefing test</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<link type="text/css" rel="stylesheet" href="bootstrap.min.css">
+	<link type="text/css" rel="stylesheet" href="local.css">
+    <script type="text/javascript" src="./data/data.js"></script>
+</head>
+<body onload="initTracking()">
+    <div class="close-button "style=""></div>
+
+    <style type="text/css">
+        .close-button {
+            position:fixed;
+            top: 10px;
+            right:10px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            background-image: url("close.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+        }
+        .logo img {
+            height: 30px;
+            max-width: 80%;
+        }
+        .logo {
+            padding: 7px 0;
+            border-bottom: 1px solid gray;
+        }
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <div class='logo'>
+        <img src="data/logo.png"></img>
+    </div>
+     <div id="ap-container"
+        class="ap-embed"
+        data-type="briefing"
+        data-id=""
+        data-limit="20"
+        data-time="1-week"
+        data-show-comment="false"
+        data-hide-imageless="true"
+        data-show-time-selector="true"
+        data-show-title="true"
+        data-load-css="false"
+        data-target-blank="false"
+        data-time-labels="24h | 3 jours | 1 semaine | 1 mois| 3 mois"
+    	data-newest-first="true"
+    	data-empty-label="D&eacute;sol&eacute;, il n'y a pas d'article disponible pour cette p&eacute;riode">
+    </div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
+

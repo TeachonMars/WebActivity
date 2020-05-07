@@ -1,0 +1,151 @@
+/* Sample css - Modified jmazoyer 10-22-2018 */
+
+.ap-briefing--header {
+  text-align: center;
+}
+
+.ap-briefing--header-text {
+width: 360px;
+display: inline-block;
+}
+.ap-briefing--title {
+    font-size: 2em;
+    color: #555555;
+    text-align: center;
+}
+
+.ap-briefing--empty {
+    padding: 15px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.logo {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.ap-briefing--description {
+    font-size: 1.2em;
+    color: #bd2130;
+    text-align: center;
+}
+
+.ap-briefing--time-selector {
+    text-align: center;
+}
+
+.ap-briefing--articles {
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ap-briefing--article { 
+    margin-bottom: 10px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.ap-briefing--article-inner {
+    padding: 15px;
+    border-bottom: 1px solid black;
+}
+.ap-briefing--article-left { 
+    margin-right: 0px;
+
+}
+.ap-briefing--article-right {
+    float: none;
+/*padding-bottom: 100px;
+    box-shadow: inset 0 0 1px #aaa;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    background-color: #FFF;*/
+    background-image: url(https://anderspink.com/placeholder.jpg);
+    box-shadow: none;
+    background-image: none;
+    width: 100%; 
+    height: auto;
+    text-align: center;
+}
+.ap-briefing--article-image {
+  margin-bottom: 15px;
+}
+
+.ap-briefing--article-title {
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    color: #00008f;
+    text-align: center;
+}
+
+.ap-briefing--article-metadata {
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.ap-briefing--article-content {
+    font-size: 0.9em;
+/*    padding-right: 10px;
+*/}
+
+.ap-briefing--article-comment {
+    margin-top: 4px;
+}
+.ap-briefing--article-comment-text {
+    font-style: italic;
+}
+
+/*Modified jmazoyer 04082018*/
+.ap-briefing--date{
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.ap-briefing--time-selector {
+
+margin-top: 10px;
+}
+.ap-briefing--time-btn {
+
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8rem;
+  line-height: 1.0;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-bottom: 5px;
+  color: #fff;
+  background-color: #e10600;
+
+
+  text-decoration: none;
+}
+
+.ap-briefing--time-btn-active{
+  color: #fff;
+  background-color: #888888;
+  border-color: #999999;  
+}
+
+
+
+@media only screen and (min-width : 768px) {
+    .ap-briefing--article { 
+/*        width: 384px;
+*/        width: 100%;
+        float: left;
+    }
+}
