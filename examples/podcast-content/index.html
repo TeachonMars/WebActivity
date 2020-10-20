@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Podcast</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta charset="UTF-8">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+    <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/wavesurfer.js"></script>
+    <script type="text/javascript" src="./data/data.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link href="css/fontawesome.css" rel="stylesheet">
+    <link href="css/solid.css" rel="stylesheet">
+</head>
+<body>
+    <style type="text/css">
+        body {
+            font-family: "Roboto", sans-serif;
+        }
+    </style>
+    <div class="container">
+        <div class="well">
+
+            <div class="row"><div class="text-center col-8 offset-2 col-sm-4 offset-sm-4"><img id="cover-img" src="" class="img-fluid mb-2 mt-2" style="display:none;"/></div></div>
+            <div class="text-center"><strong id="title"></strong></div>
+            <div class="text-center">
+                <div class="spinner-border m-3" role="status">
+                  <span class="sr-only" data-trans="loading">Loading...</span>
+                </div>
+            </div>
+            <div id="waveform"></div>
+        </div>
+        <div class="text-center">
+            <button id="back-btn" class="btn btn-default float-left" style="visibility: hidden;"><i class="fa fa-step-backward"></i></button>
+            <button id="play-btn" class="btn btn-default" style="display:none;"><i class="fa fa-pause"></i></button>
+            <button id="resume-btn" class="btn btn-default" style="display:none;"><i class="fa fa-play"></i></button>
+            <button id="fake-btn" class="btn btn-default float-right" style="visibility: hidden;"><i class="fa fa-play"></i></button>
+        </div>
+        <div class="mt-3 mb-1">
+            <hr>
+            <div class=""><strong data-trans="duration">Duration: </strong> <span id="duration"></span></div>
+            <div class="mb-3"><strong data-trans="author">Author: </strong> <span id="author"></span></div>
+            <div id="description" class=""></div>
+            <div id="footer" class="mt-3"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        window.ToM = window.ToM || (window.top && window.top.ToM);
+        $(function() {
+
+            window.addEventListener("unload", function (event) {
+                if (!window.progressSent) {
+                    sendTracking();
+                }
+            });
+            window.addEventListener("beforeunload", function (event) {
+                if (!window.progressSent) {
+                    sendTracking();
+                }
+            });
+
+            var wavesurfer = WaveSurfer.create({
+                container: '#waveform',
+                waveColor: window.podcastData.waveColor,
+                progressColor: window.podcastData.progressColor
+            });
+
+            initializeData();
+
+            wavesurfer.on("ready", function() {
+                window.currentTime = 0;
+                $("#resume-btn").show();
+                $(".spinner-border").hide();
+                initializeTracking();
+                $("#duration").html(getDurationDisplay(wavesurfer.getDuration()));
+            });
+
+            wavesurfer.load(window.podcastData.audio);
+
+            $("#play-btn").click(function() {
+                wavesurfer.playPause();
+            });
+
+            $("#resume-btn").click(function() {
+                resumeFromSuspendData();
+                $(this).hide();
+                $("#play-btn").show();
+                $("#back-btn").css({visibility: "visible"});
+            });
+
+            function updateButton() {
+                if (wavesurfer.isPlaying()) {
+                    $("#play-btn").find("i").removeClass("fa-play");
+                    $("#play-btn").find("i").addClass("fa-pause");
+                }
+                else {
+                    $("#play-btn").find("i").removeClass("fa-pause");
+                    $("#play-btn").find("i").addClass("fa-play");
+                    window.currentTime = wavesurfer.getCurrentTime();
+                }
+            }
+
+            wavesurfer.on("seek", function(seek) { window.currentTime = wavesurfer.getDuration() * seek; });
+            wavesurfer.on("audioprocess", function(t) {
+                if (window.currentTime + 1 < t) {
+                    window.currentTime = wavesurfer.getCurrentTime();
+                }
+            });
+            wavesurfer.on("play", updateButton);
+            wavesurfer.on("pause", updateButton);
+            wavesurfer.on("finish", sendTracking);
+
+            $("#back-btn").click(function() {
+                wavesurfer.seekTo(0);
+                wavesurfer.pause();
+            });
+
+            function resumeFromSuspendData() {
+                wavesurfer.play(window.currentTime);
+            }
+
+            function initializeTracking() {
+                ToM.data.init();
+
+                var suspendData = ToM.data.get("suspendData");
+                if (suspendData && suspendData.value) {
+                    suspendData = suspendData.value;
+                }
+                if (suspendData) {
+                    suspendData = JSON.parse(suspendData);
+                }
+                window.currentTime = suspendData && suspendData.currentTime ? Math.floor(suspendData.currentTime) : 0;
+                wavesurfer.seekTo(window.currentTime/wavesurfer.getDuration());
+
+            }
+            function initializeData() {
+                let language = ToM.env.get('CONTENT_LANGUAGE');
+                if (!podcastData.ui[language]) {
+                    language = 'en';
+                }
+                $("[data-trans]").each(function(el) {
+                    $(this).text(window.podcastData.ui[language][$(this).data("trans")]?window.podcastData.ui[language][$(this).data("trans")]:window.podcastData.ui['en'][$(this).data("trans")])
+                });
+
+                var metadata = window.podcastData.metadata[language];
+                $("#cover-img").attr("src", window.podcastData.cover).show();
+                $("#title").html(metadata.title);
+                $("#author").html(metadata.author);
+                $("#description").html(metadata.description);
+                $("#footer").html(window.podcastData.footer);
+
+                if (window.podcastData.controlsColor) {
+                    $("i").css({"color": window.podcastData.controlsColor});
+                }
+            }
+
+            function sendTracking() {
+                window.progressSent = true;
+                ToM.data.set("suspendData", JSON.stringify({"currentTime": window.currentTime}));
+                ToM.data.set('progress', Math.floor(wavesurfer.getCurrentTime()/wavesurfer.getDuration() * 100));
+                ToM.data.send();
+            }
+
+            function getDurationDisplay(s) {
+                s = Math.ceil(s);
+                var m,r,h;
+                h = Math.floor(s/3600);
+                r = s - h*3600;
+                m = Math.floor(r/60);
+                s = s - m*60;
+
+                return (h > 0 ? (h+":").padStart(3, '0') : "")+(m > 0 ? (m+":").padStart(3, '0') : "")+(s > 0 ? (s+"").padStart(2, '0') : "");
+            }
+        })
+    </script>
+</body>
+</html>
