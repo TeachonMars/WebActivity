@@ -50,6 +50,7 @@
         window.ToM = window.ToM || (window.top && window.top.ToM);
         $(function() {
 
+            let language = ToM.env.get('CONTENT_LANGUAGE');
             window.addEventListener("unload", function (event) {
                 if (!window.progressSent) {
                     sendTracking();
@@ -77,7 +78,18 @@
                 $("#duration").html(getDurationDisplay(wavesurfer.getDuration()));
             });
 
-            wavesurfer.load(window.podcastData.audio);
+            if (typeof window.podcastData.audio == "string") {
+                wavesurfer.load(window.podcastData.audio);
+            }
+            else if (typeof window.podcastData.audio == "object" && window.podcastData.audio[language]) {
+                wavesurfer.load(window.podcastData.audio[language]);
+            }
+            else if (typeof window.podcastData.audio == "object" && window.podcastData.audio["en"]) {
+                wavesurfer.load(window.podcastData.audio["en"]);
+            }
+            else {
+                console.error("Error while loading audio file");
+            }
 
             $("#play-btn").click(function() {
                 wavesurfer.playPause();
@@ -136,7 +148,6 @@
 
             }
             function initializeData() {
-                let language = ToM.env.get('CONTENT_LANGUAGE');
                 if (!podcastData.ui[language]) {
                     language = 'en';
                 }
@@ -144,7 +155,16 @@
                     $(this).text(window.podcastData.ui[language][$(this).data("trans")]?window.podcastData.ui[language][$(this).data("trans")]:window.podcastData.ui['en'][$(this).data("trans")])
                 });
 
-                var metadata = window.podcastData.metadata[language];
+                var metadata;
+                if (window.podcastData.metadata.title) {
+                    metadata = window.podcastData.metadata;
+                }
+                else if (window.podcastData.metadata[language]) {
+                    metadata = window.podcastData.metadata[language];
+                }
+                else {
+                    metadata = window.podcastData.metadata['en'];
+                }
                 $("#cover-img").attr("src", window.podcastData.cover).show();
                 $("#title").html(metadata.title);
                 $("#author").html(metadata.author);
@@ -158,8 +178,13 @@
 
             function sendTracking() {
                 window.progressSent = true;
+                var previousProgress = ToM.data.get('progress');
+                var currentProgress = Math.floor(wavesurfer.getCurrentTime()/wavesurfer.getDuration() * 100);
                 ToM.data.set("suspendData", JSON.stringify({"currentTime": window.currentTime}));
-                ToM.data.set('progress', Math.floor(wavesurfer.getCurrentTime()/wavesurfer.getDuration() * 100));
+                ToM.data.set('progress', currentProgress);
+                if (window.podcastData.points && previousProgress < 100 && currentProgress == 100) {
+                    ToM.data.set('points', window.podcastData.points);
+                }
                 ToM.data.send();
             }
 

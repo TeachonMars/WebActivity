@@ -1,6 +1,15 @@
 window.podcastData = {
     // Put your audio file name below
-    audio: "data/audio.mp3",
+    // Either for each language
+    audio: {
+        en: "data/audio.mp3",
+        fr: "data/audio.mp3",
+    },
+    // Or for all language at once:
+    // audio: "data/audio.mp3",
+
+    // Determine how many points the learner will earn when reaching the end of the podcast.
+    points: 30,
 
     // Change the colors of the wave form below
     // waveColor: color of the unread part (on the right hand side)
